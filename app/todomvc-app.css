@@ -1,5 +1,7 @@
 /*
  * This is the index.css file from here: https://github.com/tastejs/todomvc-app-css
+ *
+ * plus this other css file: https://github.com/tastejs/todomvc/blob/master/examples/react/src/todo/app.css
  */
 @charset 'utf-8';
 
@@ -393,4 +395,29 @@ html .clear-completed:active {
 .toggle-all:focus + label {
 	box-shadow: 0 0 2px 2px #CF7D7D;
 	outline: 0;
+}
+
+/* used for things that should be hidden in the ui,
+but useful for people who use screen readers */
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.toggle-all {
+    width: 40px !important;
+    height: 60px !important;
+    right: auto !important;
+}
+
+.toggle-all-label {
+    pointer-events: none;
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+// import "./globals.css";
 import "./todomvc-app.css";
 
 const geistSans = localFont({
@@ -25,7 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <section className="todoapp">{children}</section>
+
+        <footer className="info">
+          <p>Double-click to edit a todo</p>
+          <p>Created by the TodoMVC Team</p>
+          <p>
+            Part of <a href="http://todomvc.com">TodoMVC</a>
+          </p>
+        </footer>
       </body>
     </html>
   );
