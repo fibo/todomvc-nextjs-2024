@@ -1,0 +1,39 @@
+{
+  "name": "todomvc-nextjs-2024",
+  "description": "is an implementation of TodoMVC using NextJS v15",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "next lint",
+    "lint-staged": "lint-staged",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "15.0.0-rc.0",
+    "react": "19.0.0-rc-f994737d14-20240522",
+    "react-dom": "19.0.0-rc-f994737d14-20240522"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.0-rc.0",
+    "lint-staged": "^15.2.4",
+    "postcss": "^8",
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{cjs,md,mjs,js,jsx,ts,tsx}": [
+      "prettier --write"]	  
+  },
+  "pre-commit": [
+    "lint-staged",
+    "lint"
+  ]
+}
