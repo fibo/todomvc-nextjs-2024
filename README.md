@@ -18,3 +18,5 @@
 - Persistence:
   - [LocalStorage](https://github.com/fibo/todomvc-nextjs-2024/tree/LocalStorage): Full featured TodoMVC app with persistence in LocalStorage.
   - [db.json](https://github.com/fibo/todomvc-nextjs-2024/tree/db.json): Use NextJS API to persist todos in a locale database stored in `db.json` file.
+
+The [`final` branch](https://github.com/fibo/todomvc-nextjs-2024/tree/final) has db.json persistence plus some minor improvements.
