@@ -1,5 +1,6 @@
-export type Todo = {
+import { Item } from "./item";
+
+export type Todo = Item & {
   completed: boolean;
-  id: string;
   title: string;
 };

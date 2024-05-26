@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { DispatchAction } from "@/app/reducer";
 import { useFilter } from "@/app/hooks/useFilter";
-import { Todo } from "@/app/models/todo";
+import { Todo } from "@/app/models";
 
 type Props = {
   dispatch: DispatchAction;

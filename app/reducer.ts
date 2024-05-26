@@ -1,5 +1,5 @@
 import { Dispatch, Reducer } from "react";
-import { Todo } from "@/app/models/todo";
+import { newId, Todo } from "./models";
 
 export type Action =
   | {
@@ -7,7 +7,18 @@ export type Action =
       data: Pick<Todo, "title">;
     }
   | {
+      type: "TOGGLE_ITEM";
+      data: Pick<Todo, "id">;
+    }
+  | {
+      type: "REMOVE_ALL_ITEMS";
+    }
+  | {
       type: "REMOVE_COMPLETED_ITEMS";
+    }
+  | {
+      type: "UPDATE_ITEM";
+      data: Pick<Todo, "id" | "title">;
     };
 
 export type DispatchAction = Dispatch<Action>;
@@ -16,23 +27,38 @@ export type State = {
   todos: Todo[];
 };
 
-const newId = () =>
-  "000000".replace(/0/g, () =>
-    (Math.floor(Date.now() + Math.random() * 16) % 16).toString(16),
-  );
-
 export const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
       return {
         ...state,
-        todos: state.todos.concat({
-          id: newId(),
-          title: action.data.title,
-          completed: false,
-        }),
       };
     }
+
+    case "TOGGLE_ITEM": {
+      return {
+        ...state,
+      };
+    }
+
+    case "REMOVE_ALL_ITEMS": {
+      return {
+        ...state,
+      };
+    }
+
+    case "REMOVE_COMPLETED_ITEMS": {
+      return {
+        ...state,
+      };
+    }
+
+    case "UPDATE_ITEM": {
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }

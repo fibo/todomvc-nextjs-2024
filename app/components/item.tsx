@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { Todo } from "@/app/models";
 import { DispatchAction } from "@/app/reducer";
-import { Todo } from "@/app/models/todo";
 import { Input, InputProps } from "@/app/components/input";
 
 type Props = {
