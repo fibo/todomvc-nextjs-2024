@@ -15,7 +15,7 @@ export function Footer({ todos }: Props) {
   const filter = useFilter();
   if (!filter) redirect("/");
 
-  const activeTodos = () => todos.filter((todo) => !todo.completed);
+  const activeTodos = todos.filter((todo) => !todo.completed);
 
   const removeCompleted = async () => {
     await axios
@@ -23,11 +23,11 @@ export function Footer({ todos }: Props) {
         type: "REMOVE_COMPLETED_ITEMS",
       })
       .then(() => {
-        router.refresh();
+        router.push("/");
       });
   };
 
-  const cannotRemoveCompleted = activeTodos().length === todos.length;
+  const cannotRemoveCompleted = activeTodos.length === todos.length;
 
   const summary = `${activeTodos.length} ${activeTodos.length === 1 ? "item" : "items"} left!`;
 
