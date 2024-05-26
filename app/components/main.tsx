@@ -1,6 +1,7 @@
 import { useMemo } from "react";
-import { DispatchAction } from "../reducer";
-import { Item, Todo } from "./item";
+import { DispatchAction } from "@/app/reducer";
+import { Todo } from "@/app/models/todo";
+import { Item } from "@/app/components/item";
 
 type Props = {
   dispatch: DispatchAction;
@@ -25,7 +26,6 @@ export function Main({ dispatch, todos }: Props) {
           <input
             className="toggle-all"
             type="checkbox"
-            data-testid="toggle-all"
             checked={checked}
             onChange={toggleAll}
           />
@@ -35,7 +35,7 @@ export function Main({ dispatch, todos }: Props) {
         </div>
       ) : null}
 
-      <ul className="todo-list" data-testid="todo-list">
+      <ul className="todo-list">
         {visibleTodos.map((todo, index) => (
           <Item key={todo.id} todo={todo} dispatch={dispatch} index={index} />
         ))}

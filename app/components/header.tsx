@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { Input } from "./input";
+import { Input } from "@/app/components/input";
 
-export const Header: FC = () => {
+export function Header() {
   return (
     <header className="header">
       <h1>todos</h1>
+
       <Input
         label="New Todo Input"
         placeholder="What needs to be done?"
@@ -12,4 +12,4 @@ export const Header: FC = () => {
       />
     </header>
   );
-};
+}

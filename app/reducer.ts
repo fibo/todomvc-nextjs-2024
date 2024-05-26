@@ -1,5 +1,5 @@
 import { Dispatch, Reducer } from "react";
-import { Todo } from "./components/item";
+import { Todo } from "@/app/models/todo";
 
 type Action =
   | {

@@ -17,7 +17,7 @@ export function Input({
   onBlur,
   placeholder,
   onSubmit,
-}: Props) {
+}: InputProps) {
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (typeof onSubmit !== "function") return;
     if (event.key === "Enter") {

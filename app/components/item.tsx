@@ -1,12 +1,7 @@
 import { useState } from "react";
-import { DispatchAction } from "../reducer";
-import { Input, InputProps } from "./input";
-
-export type Todo = {
-  completed: boolean;
-  id: number;
-  title: string;
-};
+import { DispatchAction } from "@/app/reducer";
+import { Todo } from "@/app/models/todo";
+import { Input, InputProps } from "@/app/components/input";
 
 type Props = {
   index: number;
@@ -58,9 +53,7 @@ export function Item({ todo: { title, completed, id } }: Props) {
               checked={completed}
               onChange={toggleItem}
             />
-            <label data-testid="todo-item-label" onDoubleClick={setWritable}>
-              {title}
-            </label>
+            <label onDoubleClick={setWritable}>{title}</label>
             <button className="destroy" onClick={onClickDestroy} />
           </>
         )}
