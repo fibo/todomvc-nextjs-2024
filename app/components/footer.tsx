@@ -1,21 +1,22 @@
+"use client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { DispatchAction } from "@/app/reducer";
 import { useFilter } from "@/app/hooks/useFilter";
 import { Todo } from "@/app/models";
 
 type Props = {
-  dispatch: DispatchAction;
   todos: Todo[];
 };
 
-export function Footer({ dispatch, todos }: Props) {
+export function Footer({ todos }: Props) {
   const filter = useFilter();
   if (!filter) redirect("/");
 
   const activeTodos = () => todos.filter((todo) => !todo.completed);
 
-  const removeCompleted = () => dispatch({ type: "REMOVE_COMPLETED_ITEMS" });
+  const removeCompleted = () => {
+    //dispatch({ type: "REMOVE_COMPLETED_ITEMS" });
+  };
 
   const cannotRemoveCompleted = activeTodos().length === todos.length;
 

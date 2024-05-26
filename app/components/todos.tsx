@@ -1,20 +1,21 @@
-"use client";
-import { useReducer } from "react";
+import { Todo } from "@/app/models";
 import { Header } from "@/app/components/header";
 import { Main } from "@/app/components/main";
 import { Footer } from "@/app/components/footer";
-import { reducer } from "@/app/reducer";
+import axios from "@/app/axios";
 
-export function Todos() {
-  const [state, dispatch] = useReducer(reducer, { todos: [] });
+export async function Todos() {
+  const todos = (await axios
+    .get("/api/todos")
+    .then((res) => res.data)) as Todo[];
 
   return (
     <>
-      <Header dispatch={dispatch} />
+      <Header />
 
-      <Main dispatch={dispatch} todos={state.todos} />
+      <Main todos={todos} />
 
-      <Footer dispatch={dispatch} todos={state.todos} />
+      <Footer todos={todos} />
     </>
   );
 }

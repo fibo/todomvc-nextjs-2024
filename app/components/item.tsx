@@ -1,15 +1,14 @@
+"use client";
 import { ChangeEventHandler, useState } from "react";
 import { Todo } from "@/app/models";
-import { DispatchAction } from "@/app/reducer";
 import { Input, InputProps } from "@/app/components/input";
 
 type Props = {
   index: number;
-  dispatch: DispatchAction;
   todo: Todo;
 };
 
-export function Item({ dispatch, todo: { title, completed, id } }: Props) {
+export function Item({ todo: { title, completed, id } }: Props) {
   const [isWritable, setIsWritable] = useState(false);
 
   const setWritable = () => {
@@ -21,15 +20,15 @@ export function Item({ dispatch, todo: { title, completed, id } }: Props) {
   };
 
   const toggleItem: ChangeEventHandler<HTMLInputElement> = () => {
-    dispatch({ type: "TOGGLE_ITEM", data: { id } });
+    // dispatch({ type: "TOGGLE_ITEM", data: { id } });
   };
 
   const removeItem = (id: Todo["id"]) => {
-    dispatch({ type: "REMOVE_ITEM", data: { id } });
+    // dispatch({ type: "REMOVE_ITEM", data: { id } });
   };
 
   const updateItem = (id: Todo["id"], title: Todo["title"]) => {
-    dispatch({ type: "UPDATE_ITEM", data: { id, title } });
+    // dispatch({ type: "UPDATE_ITEM", data: { id, title } });
   };
 
   const submitItem: NonNullable<InputProps["submitItem"]> = (title) => {

@@ -1,16 +1,16 @@
+"use client";
 import { ChangeEventHandler, useState } from "react";
 import { Input } from "@/app/components/input";
-import { DispatchAction } from "@/app/reducer";
+import axios from "@/app/axios";
 
-type Props = {
-  dispatch: DispatchAction;
-};
-
-export function Header({ dispatch }: Props) {
+export function Header() {
   const [newTitle, setNewTitle] = useState("");
 
-  const submitItem = (title: string) => {
-    dispatch({ type: "ADD_ITEM", data: { title } });
+  const submitItem = async (title: string) => {
+    await axios.post("/api/action", {
+      type: "ADD_ITEM",
+      data: { title },
+    });
     setNewTitle("");
   };
 

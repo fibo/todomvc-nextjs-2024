@@ -14,7 +14,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "TodoMVC on Next.js 2024",
-  description: "is an implementation of TodoMVC using NextJS v15",
+  description: "is an implementation of TodoMVC using NextJS",
 };
 
 export default function RootLayout({
