@@ -1,28 +1,22 @@
 "use client";
 import { InputHTMLAttributes, KeyboardEvent } from "react";
+import { Todo } from "@/app/models";
 
-export type InputProps = Pick<
+export type InputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "autoFocus" | "defaultValue" | "onBlur" | "placeholder"
+  "className" | "onKeyDown" | "type" | "id"
 > & {
   label: string;
 } & Partial<{
-    onSubmit: (value: string) => void;
+    submitItem: (title: Todo["title"]) => void;
   }>;
 
-export function Input({
-  autoFocus,
-  defaultValue,
-  label,
-  onBlur,
-  placeholder,
-  onSubmit,
-}: InputProps) {
+export function Input({ label, submitItem, ...props }: InputProps) {
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (typeof onSubmit !== "function") return;
+    if (typeof submitItem !== "function") return;
     if (event.key === "Enter") {
       const value = event.currentTarget.value.trim();
-      onSubmit(value);
+      submitItem(value);
     }
   };
 
@@ -32,11 +26,8 @@ export function Input({
         className="new-todo"
         id="todo-input"
         type="text"
-        autoFocus={autoFocus}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-        onBlur={onBlur}
         onKeyDown={onKeyDown}
+        {...props}
       />
       <label className="visually-hidden" htmlFor="todo-input">
         {label}

@@ -17,6 +17,10 @@ export type Action =
       type: "REMOVE_COMPLETED_ITEMS";
     }
   | {
+      type: "REMOVE_ITEM";
+      data: Pick<Todo, "id">;
+    }
+  | {
       type: "UPDATE_ITEM";
       data: Pick<Todo, "id" | "title">;
     };
@@ -62,6 +66,13 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         todos: state.todos.filter((todo) => !todo.completed),
+      };
+    }
+
+    case "REMOVE_ITEM": {
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.data.id),
       };
     }
 

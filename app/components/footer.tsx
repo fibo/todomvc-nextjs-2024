@@ -12,7 +12,6 @@ type Props = {
 export function Footer({ dispatch, todos }: Props) {
   const filter = useFilter();
   if (!filter) redirect("/");
-  console.log(filter);
 
   const activeTodos = () => todos.filter((todo) => !todo.completed);
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { Todo } from "@/app/models";
 import { DispatchAction } from "@/app/reducer";
 import { Input, InputProps } from "@/app/components/input";
@@ -9,7 +9,7 @@ type Props = {
   todo: Todo;
 };
 
-export function Item({ todo: { title, completed, id } }: Props) {
+export function Item({ dispatch, todo: { title, completed, id } }: Props) {
   const [isWritable, setIsWritable] = useState(false);
 
   const setWritable = () => {
@@ -20,11 +20,17 @@ export function Item({ todo: { title, completed, id } }: Props) {
     setIsWritable(false);
   };
 
-  const toggleItem = () => {};
-  const removeItem = (id: Todo["id"]) => {};
-  const updateItem = (id: Todo["id"], title: Todo["title"]) => {};
+  const toggleItem: ChangeEventHandler<HTMLInputElement> = () => {};
 
-  const onSubmit: NonNullable<InputProps["onSubmit"]> = (title) => {
+  const removeItem = (id: Todo["id"]) => {
+    dispatch({ type: "REMOVE_ITEM", data: { id } });
+  };
+
+  const updateItem = (id: Todo["id"], title: Todo["title"]) => {
+    dispatch({ type: "UPDATE_ITEM", data: { id, title } });
+  };
+
+  const submitItem: NonNullable<InputProps["submitItem"]> = (title) => {
     if (title.length === 0) removeItem(id);
     else updateItem(id, title);
 
@@ -40,7 +46,7 @@ export function Item({ todo: { title, completed, id } }: Props) {
       <div className="view">
         {isWritable ? (
           <Input
-            onSubmit={onSubmit}
+            submitItem={submitItem}
             label="Edit Todo Input"
             defaultValue={title}
             onBlur={setReadonly}
@@ -53,7 +59,9 @@ export function Item({ todo: { title, completed, id } }: Props) {
               checked={completed}
               onChange={toggleItem}
             />
+
             <label onDoubleClick={setWritable}>{title}</label>
+
             <button className="destroy" onClick={onClickDestroy} />
           </>
         )}

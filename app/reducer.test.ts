@@ -1,6 +1,5 @@
 import { describe, expect, test } from "vitest";
 import { Action, State, reducer } from "./reducer";
-import exp from "constants";
 
 describe("reducer", () => {
   test("ADD_ITEM", () => {
@@ -75,6 +74,26 @@ describe("reducer", () => {
     const nextState = reducer(state, action);
     expect(nextState.todos.length).toBe(1);
     expect(nextState.todos[0].id).toBe("abc123");
+  });
+
+  test("REMOVE_ITEM", () => {
+    const id = "abc123";
+    const state: State = {
+      todos: [
+        { id, title: "Title", completed: false },
+        { id: "def456", title: "Title", completed: true },
+      ],
+    };
+    const action: Action = {
+      type: "REMOVE_ITEM",
+      data: {
+        id,
+      },
+    };
+    const nextState = reducer(state, action);
+    expect(nextState.todos.length).toBe(1);
+    const todo = nextState.todos.find((todo) => todo.id === id);
+    expect(todo).toBeUndefined();
   });
 
   test("UPDATE_ITEM", () => {
