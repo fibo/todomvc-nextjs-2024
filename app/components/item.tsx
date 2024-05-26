@@ -20,7 +20,9 @@ export function Item({ dispatch, todo: { title, completed, id } }: Props) {
     setIsWritable(false);
   };
 
-  const toggleItem: ChangeEventHandler<HTMLInputElement> = () => {};
+  const toggleItem: ChangeEventHandler<HTMLInputElement> = () => {
+    dispatch({ type: "TOGGLE_ITEM", data: { id } });
+  };
 
   const removeItem = (id: Todo["id"]) => {
     dispatch({ type: "REMOVE_ITEM", data: { id } });

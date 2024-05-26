@@ -29,15 +29,27 @@ export function Footer({ dispatch, todos }: Props) {
 
       <ul className="filters">
         <li>
-          <Link href="/">All</Link>
+          <Link href="/" className={filter === "all" ? "selected" : undefined}>
+            All
+          </Link>
         </li>
 
         <li>
-          <Link href="/active">Active</Link>
+          <Link
+            href="/active"
+            className={filter === "active" ? "selected" : undefined}
+          >
+            Active
+          </Link>
         </li>
 
         <li>
-          <Link href="/completed">Completed</Link>
+          <Link
+            href="/completed"
+            className={filter === "completed" ? "selected" : undefined}
+          >
+            Completed
+          </Link>
         </li>
       </ul>
 

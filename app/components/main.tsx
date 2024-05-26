@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { ChangeEventHandler, useMemo } from "react";
+import { useFilter } from "@/app/hooks/useFilter";
 import { Todo } from "@/app/models";
 import { DispatchAction } from "@/app/reducer";
 import { Item } from "@/app/components/item";
@@ -9,15 +10,29 @@ type Props = {
 };
 
 export function Main({ dispatch, todos }: Props) {
+  const filter = useFilter();
+
   const { checked, visibleTodos } = useMemo(() => {
-    const visibleTodos = todos.filter((todo) => !todo.completed);
+    const visibleTodos = todos.filter((todo) => {
+      if (filter === "completed") return todo.completed;
+      if (filter === "active") return !todo.completed;
+      // filter === "all"
+      return true;
+    });
     return {
       checked: visibleTodos.every((todo) => todo.completed),
       visibleTodos,
     };
-  }, [todos]);
+  }, [filter, todos]);
 
-  const toggleAll = () => {};
+  const toggleAll: ChangeEventHandler<HTMLInputElement> = (event) => {
+    dispatch({
+      type: "TOGGLE_ALL",
+      data: {
+        completed: event.currentTarget.checked,
+      },
+    });
+  };
 
   return (
     <main className="main">

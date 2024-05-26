@@ -7,6 +7,10 @@ export type Action =
       data: Pick<Todo, "title">;
     }
   | {
+      type: "TOGGLE_ALL";
+      data: Pick<Todo, "completed">;
+    }
+  | {
       type: "TOGGLE_ITEM";
       data: Pick<Todo, "id">;
     }
@@ -44,6 +48,16 @@ export const reducer: Reducer<State, Action> = (state, action) => {
       };
     }
 
+    case "TOGGLE_ALL": {
+      const { completed } = action.data;
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.completed !== completed) return { ...todo, completed };
+          return todo;
+        }),
+      };
+    }
     case "TOGGLE_ITEM": {
       return {
         ...state,

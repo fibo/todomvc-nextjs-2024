@@ -20,6 +20,48 @@ describe("reducer", () => {
     expect(todo.title).toBe(title);
   });
 
+  test("TOGGLE_ALL", () => {
+    const state: State = {
+      todos: [
+        {
+          id: "abc123",
+          title: "Title 1",
+          completed: false,
+        },
+        {
+          id: "def456",
+          title: "Title 2",
+          completed: true,
+        },
+      ],
+    };
+
+    const action1: Action = {
+      type: "TOGGLE_ALL",
+      data: {
+        completed: true,
+      },
+    };
+    const nextState1 = reducer(state, action1);
+    expect(
+      nextState1.todos.every(
+        (todo) => todo.completed === action1.data.completed,
+      ),
+    ).toBe(true);
+
+    const action2: Action = {
+      type: "TOGGLE_ALL",
+      data: {
+        completed: false,
+      },
+    };
+    const nextState2 = reducer(state, action2);
+    expect(
+      nextState2.todos.every(
+        (todo) => todo.completed === action2.data.completed,
+      ),
+    ).toBe(true);
+  });
   test("TOGGLE_ITEM", () => {
     const id = "abc123";
     const state: State = {
