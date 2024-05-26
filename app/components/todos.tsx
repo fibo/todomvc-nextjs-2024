@@ -5,15 +5,7 @@ import { Footer } from "@/app/components/footer";
 import { reducer } from "@/app/reducer";
 
 export function Todos() {
-  const [state, dispatch] = useReducer(reducer, {
-    todos: [
-      {
-        id: 1,
-        title: "Todo 1",
-        completed: false,
-      },
-    ],
-  });
+  const [state, dispatch] = useReducer(reducer, { todos: [] });
 
   return (
     <>
