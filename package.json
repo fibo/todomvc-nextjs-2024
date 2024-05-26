@@ -8,7 +8,8 @@
     "build": "next build",
     "lint": "next lint",
     "lint-staged": "lint-staged",
-    "start": "next start"
+    "start": "next start",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
     "next": "15.0.0-rc.0",
@@ -33,6 +34,7 @@
       "prettier --write"]	  
   },
   "pre-commit": [
+	  "tsc",
     "lint-staged",
     "lint"
   ]
