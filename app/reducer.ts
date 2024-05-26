@@ -1,4 +1,5 @@
 import { Dispatch, Reducer } from "react";
+import { WebStorage } from "./webStorage";
 import { newId, Todo } from "./models";
 
 export type Action =
@@ -35,69 +36,85 @@ export type State = {
   todos: Todo[];
 };
 
+const storage = new WebStorage();
+
 export const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
+      const todos = state.todos.concat({
+        id: newId(),
+        title: action.data.title,
+        completed: false,
+      });
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.concat({
-          id: newId(),
-          title: action.data.title,
-          completed: false,
-        }),
+        todos,
       };
     }
 
     case "TOGGLE_ALL": {
       const { completed } = action.data;
+      const todos = state.todos.map((todo) => {
+        if (todo.completed !== completed) return { ...todo, completed };
+        return todo;
+      });
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.completed !== completed) return { ...todo, completed };
-          return todo;
-        }),
+        todos,
       };
     }
     case "TOGGLE_ITEM": {
+      const todos = state.todos.map((todo) => {
+        if (todo.id === action.data.id)
+          return { ...todo, completed: !todo.completed };
+        return todo;
+      });
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.data.id)
-            return { ...todo, completed: !todo.completed };
-          return todo;
-        }),
+        todos,
       };
     }
 
     case "REMOVE_ALL_ITEMS": {
+      const todos: Todo[] = [];
+      storage.todos = todos;
       return {
         ...state,
-        todos: [],
+        todos,
       };
     }
 
     case "REMOVE_COMPLETED_ITEMS": {
+      const todos = state.todos.filter((todo) => !todo.completed);
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.filter((todo) => !todo.completed),
+        todos,
       };
     }
 
     case "REMOVE_ITEM": {
+      const todos = state.todos.filter((todo) => todo.id !== action.data.id);
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.data.id),
+        todos,
       };
     }
 
     case "UPDATE_ITEM": {
+      const todos = state.todos.map((todo) => {
+        if (todo.id === action.data.id)
+          return { ...todo, title: action.data.title };
+        return todo;
+      });
+      storage.todos = todos;
       return {
         ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === action.data.id)
-            return { ...todo, title: action.data.title };
-          return todo;
-        }),
+        todos,
       };
     }
 

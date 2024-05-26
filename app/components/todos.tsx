@@ -4,9 +4,12 @@ import { Header } from "@/app/components/header";
 import { Main } from "@/app/components/main";
 import { Footer } from "@/app/components/footer";
 import { reducer } from "@/app/reducer";
+import { WebStorage } from "@/app/webStorage";
+
+const storage = new WebStorage();
 
 export function Todos() {
-  const [state, dispatch] = useReducer(reducer, { todos: [] });
+  const [state, dispatch] = useReducer(reducer, { todos: storage.todos });
 
   return (
     <>

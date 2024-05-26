@@ -10,8 +10,8 @@
     "lint": "next lint",
     "lint-staged": "lint-staged",
     "start": "next start",
-    "test": "vitest run",
-    "test_watch": "vitest",
+    "test": "vitest run --environment jsdom",
+    "test_watch": "vitest --environment jsdom",
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-rc.0",
+    "jsdom": "^24.1.0",
     "lint-staged": "^15.2.4",
     "postcss": "^8",
     "pre-commit": "^1.2.2",
