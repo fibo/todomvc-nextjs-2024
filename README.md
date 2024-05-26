@@ -11,3 +11,4 @@
 
 - [START HERE](https://github.com/fibo/todomvc-nextjs-2024/tree/START_HERE): NextJS and all dependencies configured.
 - [UI](https://github.com/fibo/todomvc-nextjs-2024/tree/UI): Pure UI components, no feature implemented.
+- [routing](https://github.com/fibo/todomvc-nextjs-2024/tree/routing): Use NextJS routing to filter todos.
