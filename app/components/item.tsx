@@ -1,5 +1,7 @@
 "use client";
 import { ChangeEventHandler, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "@/app/axios";
 import { Todo } from "@/app/models";
 import { Input, InputProps } from "@/app/components/input";
 
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export function Item({ todo: { title, completed, id } }: Props) {
+  const router = useRouter();
+
   const [isWritable, setIsWritable] = useState(false);
 
   const setWritable = () => {
@@ -19,16 +23,37 @@ export function Item({ todo: { title, completed, id } }: Props) {
     setIsWritable(false);
   };
 
-  const toggleItem: ChangeEventHandler<HTMLInputElement> = () => {
-    // dispatch({ type: "TOGGLE_ITEM", data: { id } });
+  const toggleItem: ChangeEventHandler<HTMLInputElement> = async () => {
+    await axios
+      .post("/api/action", {
+        type: "TOGGLE_ITEM",
+        data: { id },
+      })
+      .then(() => {
+        router.refresh();
+      });
   };
 
-  const removeItem = (id: Todo["id"]) => {
-    // dispatch({ type: "REMOVE_ITEM", data: { id } });
+  const removeItem = async (id: Todo["id"]) => {
+    await axios
+      .post("/api/action", {
+        type: "REMOVE_ITEM",
+        data: { id },
+      })
+      .then(() => {
+        router.refresh();
+      });
   };
 
-  const updateItem = (id: Todo["id"], title: Todo["title"]) => {
-    // dispatch({ type: "UPDATE_ITEM", data: { id, title } });
+  const updateItem = async (id: Todo["id"], title: Todo["title"]) => {
+    await axios
+      .post("/api/action", {
+        type: "UPDATE_ITEM",
+        data: { id, title },
+      })
+      .then(() => {
+        router.refresh();
+      });
   };
 
   const submitItem: NonNullable<InputProps["submitItem"]> = (title) => {

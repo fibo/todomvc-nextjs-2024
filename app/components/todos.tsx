@@ -1,8 +1,8 @@
+import axios from "@/app/axios";
 import { Todo } from "@/app/models";
 import { Header } from "@/app/components/header";
 import { Main } from "@/app/components/main";
 import { Footer } from "@/app/components/footer";
-import axios from "@/app/axios";
 
 export async function Todos() {
   const todos = (await axios

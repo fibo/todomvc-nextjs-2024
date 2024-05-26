@@ -9,7 +9,6 @@
     "build": "next build",
     "lint": "next lint",
     "lint-staged": "lint-staged",
-    "local_api": "node local_api.js",
     "start": "next start",
     "test": "vitest run",
     "test_watch": "vitest",

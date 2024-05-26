@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import axios from "@/app/axios";
 import { useFilter } from "@/app/hooks/useFilter";
 import { Todo } from "@/app/models";
 
@@ -9,13 +10,21 @@ type Props = {
 };
 
 export function Footer({ todos }: Props) {
+  const router = useRouter();
+
   const filter = useFilter();
   if (!filter) redirect("/");
 
   const activeTodos = () => todos.filter((todo) => !todo.completed);
 
-  const removeCompleted = () => {
-    //dispatch({ type: "REMOVE_COMPLETED_ITEMS" });
+  const removeCompleted = async () => {
+    await axios
+      .post("/api/action", {
+        type: "REMOVE_COMPLETED_ITEMS",
+      })
+      .then(() => {
+        router.refresh();
+      });
   };
 
   const cannotRemoveCompleted = activeTodos().length === todos.length;

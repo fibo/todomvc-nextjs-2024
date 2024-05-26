@@ -1,5 +1,7 @@
 "use client";
 import { ChangeEventHandler, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import axios from "@/app/axios";
 import { useFilter } from "@/app/hooks/useFilter";
 import { Todo } from "@/app/models";
 import { Item } from "@/app/components/item";
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export function Main({ todos }: Props) {
+  const router = useRouter();
+
   const filter = useFilter();
 
   const { checked, visibleTodos } = useMemo(() => {
@@ -24,13 +28,17 @@ export function Main({ todos }: Props) {
     };
   }, [filter, todos]);
 
-  const toggleAll: ChangeEventHandler<HTMLInputElement> = (event) => {
-    // dispatch({
-    //   type: "TOGGLE_ALL",
-    //   data: {
-    //     completed: event.currentTarget.checked,
-    //   },
-    // });
+  const toggleAll: ChangeEventHandler<HTMLInputElement> = async (event) => {
+    await axios
+      .post("/api/action", {
+        type: "TOGGLE_ALL",
+        data: {
+          completed: event.currentTarget.checked,
+        },
+      })
+      .then(() => {
+        router.refresh();
+      });
   };
 
   return (

@@ -1,17 +1,23 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useState } from "react";
 import { Input } from "@/app/components/input";
 import axios from "@/app/axios";
 
 export function Header() {
+  const router = useRouter();
   const [newTitle, setNewTitle] = useState("");
 
   const submitItem = async (title: string) => {
-    await axios.post("/api/action", {
-      type: "ADD_ITEM",
-      data: { title },
-    });
-    setNewTitle("");
+    await axios
+      .post("/api/action", {
+        type: "ADD_ITEM",
+        data: { title },
+      })
+      .then(() => {
+        setNewTitle("");
+        router.refresh();
+      });
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
