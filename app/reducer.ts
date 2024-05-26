@@ -1,7 +1,7 @@
 import { Dispatch, Reducer } from "react";
 import { Todo } from "@/app/models/todo";
 
-type Action =
+export type Action =
   | {
       type: "ADD_ITEM";
       data: Pick<Todo, "title">;
@@ -12,7 +12,7 @@ type Action =
 
 export type DispatchAction = Dispatch<Action>;
 
-type State = {
+export type State = {
   todos: Todo[];
 };
 

@@ -2,6 +2,7 @@
   "name": "todomvc-nextjs-2024",
   "description": "is an implementation of TodoMVC using NextJS v15",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +10,7 @@
     "lint": "next lint",
     "lint-staged": "lint-staged",
     "start": "next start",
+    "test": "node --test --no-warnings=ExperimentalWarning --loader ts-node/esm **/*_test.ts",
     "tsc": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,6 +29,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "lint-staged": {
